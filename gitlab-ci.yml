@@ -1,0 +1,15 @@
+stages:
+  - deploy
+
+variables:
+  DOCKER_HOST: tcp://docker-swarm:2375
+  TRAEFIK_STACK: traefik.yml
+  GRAFANA_STACK: grafana.yml
+
+deploy:
+  stage: deploy
+  script:
+    - docker stack deploy -c $TRAEFIK_STACK traefik
+    - docker stack deploy -c $GRAFANA_STACK grafana
+  only:
+    - master

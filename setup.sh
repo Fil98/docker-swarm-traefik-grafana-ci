@@ -122,13 +122,23 @@ deploy:
     - master
 EOL
 
+# Установка основной ветки по умолчанию
+git config --global init.defaultBranch main
+
+# Добавление текущей рабочей директории в список безопасных директорий
+git config --global --add safe.directory "$(pwd)"
+
+# Настройка пользователя Git
+git config --global user.email "your-email@example.com"
+git config --global user.name "Your Name"
+
 # Инициализация Git репозитория и пуш в GitLab
 echo "Инициализация Git репозитория и пуш в GitLab..."
 git init
 git add traefik.yml grafana.yml .gitlab-ci.yml
 git commit -m "Добавить конфигурации Traefik, Grafana и GitLab CI"
 git remote add origin https://gitlab.com/yourusername/your-repo.git
-git push -u origin master
+git push -u origin main
 
 # Деплой стеков
 echo "Деплой стеков Traefik и Grafana..."

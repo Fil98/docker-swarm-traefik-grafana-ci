@@ -122,6 +122,14 @@ deploy:
     - master
 EOL
 
+# Инициализация Git репозитория и пуш в GitLab
+echo "Инициализация Git репозитория и пуш в GitLab..."
+git init
+git add traefik.yml grafana.yml .gitlab-ci.yml
+git commit -m "Добавить конфигурации Traefik, Grafana и GitLab CI"
+git remote add origin https://gitlab.com/yourusername/your-repo.git
+git push -u origin master
+
 # Деплой стеков
 echo "Деплой стеков Traefik и Grafana..."
 sudo docker stack deploy -c traefik.yml traefik
